@@ -35,5 +35,7 @@ elixir(mix => {
         .webpack(
             './resources/assets/template/js/app.js',
             './public/template/js/main.js'
-        );
+        )
+        .styles('./resources/assets/template/css/*.css', 'public/template/css/vendor.css')
+        .scripts('./resources/assets/template/js/vendor/*.js', 'public/template/js/vendor.js');
 });
