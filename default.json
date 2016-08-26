@@ -1,0 +1,28 @@
+{
+    "stylus": {
+        "source": "./resources/assets/template/stylus/bootstrap.styl",
+        "target": "./public/template/css/main.css"
+    },
+    "browsersync": {
+        "baseDir": "./public/template",
+        "watch": "./public/template/**/*.*"
+    },
+    "webpack": {
+        "source": "./resources/assets/template/js/app.js",
+        "target": "./public/template/js/main.js"
+    },
+    "css": {
+        "source": "./resources/assets/template/css/*.css",
+        "target": "public/template/css/vendor.css"
+    },
+    "scripts": {
+        "source": "./resources/assets/template/js/vendor/*.js",
+        "target": "./public/template/js/vendor.js"
+    },
+    "html": {
+        "source": ["./resources/assets/template/html/*.html", "!./resources/assets/template/html/includes/*.html"],
+        "includesSource": "./resources/assets/template/html/includes",
+        "target": "./public/template",
+        "watch": "./resources/assets/template/html/**/*.html"
+    }
+}

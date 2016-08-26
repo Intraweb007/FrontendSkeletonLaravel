@@ -1,16 +1,17 @@
-var gulp = require('gulp');
-var Elixir = require('laravel-elixir');
-var fileinclude = require('gulp-file-include');
+const gulp = require('gulp');
+const Elixir = require('laravel-elixir');
+const fileinclude = require('gulp-file-include');
+const config = require('config');
 
-var Task = Elixir.Task;
+const Task = Elixir.Task;
 
 Elixir.extend('htmlInclude', function() {
     new Task('htmlInclude', function() {
-        return gulp.src(["./resources/assets/template/html/*.html", "!./resources/assets/template/html/includes/*.html"])
+        return gulp.src(config.get('html.source'))
             .pipe(fileinclude({
                 prefix: '@@',
-                basepath: "./resources/assets/template/html/includes"
+                basepath: config.get('html.includesSource')
             }))
-            .pipe(gulp.dest("./public/template"));
-    }).watch('./resources/assets/template/html/**/*.html');
+            .pipe(gulp.dest(config.get('html.target')));
+    }).watch(config.get('html.watch'));
 });

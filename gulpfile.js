@@ -1,6 +1,10 @@
+process.env.NODE_CONFIG_DIR = './';
+process.env.NODE_ENV = 'production';
+
 const elixir = require('laravel-elixir');
 const postStylus = require('poststylus');
 const rupture = require('rupture');
+const config = require('config');
 
 require('laravel-elixir-vue');
 require('./elixir-extensions/html-include');
@@ -22,20 +26,20 @@ elixir.config.browserSync = {
  */
 
 elixir(mix => {
-    mix.stylus('./resources/assets/template/stylus/bootstrap.styl', './public/template/css/main.css', {
+    mix.stylus(config.get('stylus.source'), config.get('stylus.target'), {
         use: [rupture(), postStylus(['lost'])]
     })
         .browserSync({
             server: {
-                baseDir: "./public/template"
+                baseDir: config.get('browsersync.baseDir')
             },
-            files: "./public/template/**/*.*"
+            files: config.get('browsersync.watch')
         })
         .htmlInclude()
         .webpack(
-            './resources/assets/template/js/app.js',
-            './public/template/js/main.js'
+            config.get('webpack.source'),
+            config.get('webpack.target')
         )
-        .styles('./resources/assets/template/css/*.css', 'public/template/css/vendor.css')
-        .scripts('./resources/assets/template/js/vendor/*.js', 'public/template/js/vendor.js');
+        .styles(config.get('css.source'), config.get('css.target'))
+        .scripts(config.get('scripts.source'), config.get('scripts.target'));
 });
