@@ -1,11 +1,21 @@
 {
+    "postcss": {
+        "source": "./public/template/css/main.css",
+        "target": "./public/template/css/min",
+        "watch": "./public/template/css/main.css"
+    },
+    "uglify": {
+        "source": "./public/template/js/main.js",
+        "target": "./public/template/js/min",
+        "watch": "./public/template/js/main.js"
+    },
     "stylus": {
         "source": "./resources/assets/template/stylus/bootstrap.styl",
         "target": "./public/template/css/main.css"
     },
     "browsersync": {
         "baseDir": "./public/template",
-        "watch": "./public/template/**/*.*"
+        "watch": ["./public/template/*.html", "./public/template/css/min/main.css", "./public/template/js/min/main.js"]
     },
     "webpack": {
         "source": "./resources/assets/template/js/app.js",

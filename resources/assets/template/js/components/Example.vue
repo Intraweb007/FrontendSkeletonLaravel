@@ -10,7 +10,7 @@
 <script>
     export default {
         ready() {
-            console.log('I am component. Component ready.')
+            console.log('I am component.')
         }
     }
 </script>

@@ -8,11 +8,16 @@ const config = require('config');
 
 require('laravel-elixir-vue');
 require('./elixir-extensions/html-include');
+require('./elixir-extensions/postcss');
+require('./elixir-extensions/uglify');
 
-elixir.config.browserSync = {
+Elixir.config.browserSync = {
     reloadOnRestart: true,
     notify: true
 };
+
+Elixir.config.css.autoprefix.enabled = false;
+Elixir.config.sourcemaps = false;
 
 /*
  |--------------------------------------------------------------------------
@@ -41,5 +46,7 @@ elixir(mix => {
             config.get('webpack.target')
         )
         .styles(config.get('css.source'), config.get('css.target'))
-        .scripts(config.get('scripts.source'), config.get('scripts.target'));
+        .scripts(config.get('scripts.source'), config.get('scripts.target'))
+        .uglifyJS()
+        .postCSS();
 });
