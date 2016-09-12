@@ -2,8 +2,6 @@ process.env.NODE_CONFIG_DIR = './';
 process.env.NODE_ENV = 'production';
 
 const elixir = require('laravel-elixir');
-const postStylus = require('poststylus');
-const rupture = require('rupture');
 const config = require('config');
 
 require('laravel-elixir-vue');
@@ -31,10 +29,7 @@ Elixir.config.sourcemaps = false;
  */
 
 elixir(mix => {
-    mix.stylus(config.get('stylus.source'), config.get('stylus.target'), {
-        use: [rupture(), postStylus(['lost'])]
-    })
-        .browserSync({
+    mix.browserSync({
             server: {
                 baseDir: config.get('browsersync.baseDir')
             },

@@ -1,0 +1,8 @@
+html, body {
+  lost-utility: clearfix;
+}
+
+@include component(button) {
+  background: #6BD9ED;
+  padding: 15px;
+}

@@ -1,17 +1,13 @@
 {
     "postcss": {
-        "source": "./public/template/css/main.css",
+        "source": "./resources/assets/template/postcss/bootstrap.css",
         "target": "./public/template/css/min",
-        "watch": "./public/template/css/main.css"
+        "watch": "./resources/assets/template/postcss/*.css"
     },
     "uglify": {
         "source": "./public/template/js/main.js",
         "target": "./public/template/js/min",
         "watch": "./public/template/js/main.js"
-    },
-    "stylus": {
-        "source": "./resources/assets/template/stylus/bootstrap.styl",
-        "target": "./public/template/css/main.css"
     },
     "browsersync": {
         "baseDir": "./public/template",
