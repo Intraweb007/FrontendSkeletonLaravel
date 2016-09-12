@@ -5,6 +5,7 @@
         "watch": "./public/template/css/main.css"
     },
     "uglify": {
+        "enable": false,
         "source": "./public/template/js/main.js",
         "target": "./public/template/js/min",
         "watch": "./public/template/js/main.js"

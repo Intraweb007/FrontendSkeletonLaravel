@@ -68,9 +68,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+"use strict";
+'use strict';
+
 window.$ = window.jQuery = __webpack_require__(4);
 window.Vue = __webpack_require__(6);
-
 
 /***/ },
 /* 1 */
@@ -10297,25 +10299,40 @@ var process = module.exports = {};
 var cachedSetTimeout;
 var cachedClearTimeout;
 
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
 (function () {
     try {
-        cachedSetTimeout = setTimeout;
-    } catch (e) {
-        cachedSetTimeout = function () {
-            throw new Error('setTimeout is not defined');
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
         }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
     }
     try {
-        cachedClearTimeout = clearTimeout;
-    } catch (e) {
-        cachedClearTimeout = function () {
-            throw new Error('clearTimeout is not defined');
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
         }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
     }
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
         //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
         return setTimeout(fun, 0);
     }
     try {
@@ -10336,6 +10353,11 @@ function runTimeout(fun) {
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
         //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
         return clearTimeout(marker);
     }
     try {
@@ -20886,6 +20908,9 @@ if(false) {
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
+"use strict";
+'use strict';
+
 __webpack_require__(0);
 
 Vue.component('example', __webpack_require__(1));
@@ -20894,8 +20919,7 @@ var app = new Vue({
     el: 'body'
 });
 
-swal({title: "Success!", text: "Fun!", type: "success", confirmButtonText: "Cool"});
-
+swal({ title: "Success!", text: "Fun!", type: "success", confirmButtonText: "Cool" });
 
 /***/ }
 /******/ ]);
